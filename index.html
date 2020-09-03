@@ -7,26 +7,58 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body >
-    <h1>Teste de Projecao</h1>
+    <div id="decoracao"></div>
+    <div id="container">
+        <header id="titulo">
+            <h1>Teste de Projecao</h1>
 
-    <h2>DIAS PROJETADOS</h2>
-        <div>Digite um valor: 
-            <input type="number" id="numero">
+        </header>
 
-            <input type="button" class="adicionar" value="Projetar" onclick="add()" />
+        <section id="conteudo">
+            <div id="blocoDados">
+                <h3>Digite um valor:</h3> 
+                
+                <input type="number" id="numero">
 
-            <p id="diasEscolhidos">
-                Resultado...
-            </p>
+                <input type="button" class="adicionar" value="Projetar" onclick="add()" />
+            
+            </div>
 
-        </div>
+            <div id="blocoDados">
+                <h2>DIAS PROJETADOS</h2>
 
-    <h2>PROJECAO DE CASOS TOTAIS</h2>
-        <p id="projecaoAtual">
-            Resultado...
-        </p>
+                <h3 id="diasEscolhidos">
+                    Resultado...
+                </h3>
+
+            </div>
+
+        </section>
+
+        <section id="conteudo">
+            <div id="blocoDados">
+                <h2>PROJECAO DE CASOS TOTAIS</h2>
+
+                    <h3 id="projecaoAtual">
+                        
+                    </h3>
+            
+            </div>
+
+        </section>
+
+
+    
+
+    <footer id="rodape">
+
+
+    </footer>
+    
 
     <script src="js/javaScript.js"></script>
     
+    </div>
+
 </body>
 </html>
