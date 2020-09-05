@@ -1,5 +1,6 @@
-# calculadora_covid
-Calculadora desenvolvida, para estimar a quantidade de casos de COVID-19 nos próximos dias, utilizando como base de calculo o ultimo senso disponibilizado
+# CALCULADORA COVID-19
+Calculadora desenvolvida para estimar a quantidade total de casos de covid, ao logo dos dias. Utilizando com base de calculos, os ultimo sensos realizados, sobre os infectados pelo novo coronavirus
 
-# calculadora_covid
+## AJUSTES NECESSARIOS
+estou estudando uma forma mais correta de realizar a coleta de dados vindos do servidor, onde contem os dados dos novos casos de covid-19.
 

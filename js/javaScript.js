@@ -2,12 +2,19 @@ var dias;
 var valorResultado = 0;
 var contador = 1;
 var potencia = 1;
+var armazenar = 0;
 var lock = false;
 
 //COLETA DE DADOS
-var calcularProjecao = [24288572, 24563380, 24776988, 25051178, 25334339, 25584820, 25835301];
+var calcularProjecao = [];
 
 function funcaoProjecao() {
+    console.log("Valores atribuidos ao array")
+    for(let i = 0; i < 6; i++){
+        console.log("Array calcularProjecao, posicao "+ i +" = "+ calcularProjecao[i]);
+
+    }
+
     if(dias < 0){
         alert("Essa opcao e invalida!");
         lock == true;
@@ -39,7 +46,7 @@ function funcaoProjecao() {
         valorResultado = valorResultado / 6;
         console.log("O valor da curva de crescimento e: "+ valorResultado);
 
-        //LOGICA DE POTENCIA
+        //LOGICA DE POTENCIA (UTILIZANDO OS DIAS COMO PARAMETRO DE QUANTIDADE)
         for(let i = 0; i < dias; i++){
             potencia = potencia * valorResultado;
 
@@ -87,37 +94,41 @@ function add(){
 }
 
 //ARMAZENANDO VALORES NO ARRAY CAPITURADOS DO .JSON
-window.addEventListener('load', function(){
+window.addEventListener('load', function iniciar(){
     fetch('https://covid.ourworldindata.org/data/owid-covid-data.json')
         .then(function (response) {
             console.log(response)
             return response.json()
         })
         .then(function (response){
-            //console.log(response.OWID_WRL.data)
+            for(var j = 0; j < response.OWID_WRL.data.length; j++){ 
+                
+                console.log("Posicao "+ j)
+                console.log(response.OWID_WRL.data[j].total_cases)
 
-            var armazenar = 0;
+                let cont = 0;
+                armazenar = armazenar + (response.OWID_WRL.data[(cont+1)].total_cases / response.OWID_WRL.data[j].total_cases)
+                console.log("O resultado: "+ armazenar) 
 
-            for(let i = 0; i < response.OWID_WRL.data.length; i++){ 
+                if(j >= 243){
+                    /*NECESSARIO REALIZAR MELHORAMENTOS*/
+                    calcularProjecao[0] = response.OWID_WRL.data[243].total_cases;
+                    calcularProjecao[1] = response.OWID_WRL.data[244].total_cases;
+                    calcularProjecao[2] = response.OWID_WRL.data[245].total_cases;
+                    calcularProjecao[3] = response.OWID_WRL.data[246].total_cases;
+                    calcularProjecao[4] = response.OWID_WRL.data[247].total_cases;
+                    calcularProjecao[5] = response.OWID_WRL.data[248].total_cases;
+                    calcularProjecao[6] = response.OWID_WRL.data[249].total_cases;
 
-                console.log(response.OWID_WRL.data[i].total_cases)
-                //armazenar = armazenar + response.OWID_WRL.data[i].new_cases
+                    console.log("Valor atribuido ao array CalcularProjecao")
 
-                armazenar = armazenar + (response.OWID_WRL.data[i++].total_cases / response.OWID_WRL.data[i].total_cases)
+                }else{
+                    console.log("Valor invalido")
+            
+                }
 
             }
-
-            console.log("Amazem e igual a: "+ armazenar)
-
-            receberValor(armazenar)
 
        })
         
 });
-
-function receberValor(totalCasos){
-    var calcularProjecao = 0;
-    calcularProjecao = calcularProjecao + totalCasos;
-    console.log("O valor recebido de aramzem foi de : "+ totalCasos)
-
-}
