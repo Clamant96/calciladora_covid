@@ -42,7 +42,7 @@ function funcaoProjecao() {
         }
 
         //OBTER MEDIA
-        valorResultado = valorResultado / (calcularProjecao.length - 1);
+        valorResultado = valorResultado / 6;
         console.log("O valor da curva de crescimento e: "+ valorResultado);
 
         //LOGICA DE POTENCIA (UTILIZANDO OS DIAS COMO PARAMETRO DE QUANTIDADE PARA A POTENCIA)
