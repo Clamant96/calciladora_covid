@@ -3,31 +3,30 @@ var valorResultado = 0;
 var contador = 1;
 var potencia = 1;
 var armazenar = 0;
-var lock = false;
+
+//CONTADOR DE DIVISOR DO ARRAY .json
+let cont = 0;
+
+//CONTADORES DE ATRIBUICAO AO ARRAY 'calcularProjetcao'
+let valorCalcular = 0;
+let valorRequisicao = 243;
 
 //COLETA DE DADOS
 var calcularProjecao = [];
 
 function funcaoProjecao() {
     console.log("Valores atribuidos ao array")
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < calcularProjecao.length; i++){
         console.log("Array calcularProjecao, posicao "+ i +" = "+ calcularProjecao[i]);
 
     }
 
-    if(dias < 0){
-        alert("Essa opcao e invalida!");
-        lock == true;
+    if(dias <= 0){
+        console.log("Opcao e invalida, digite um numero mais que 0!");
+        document.getElementById('diasEscolhidos').innerHTML = `${dias} e uma opcao e invalida!`;
     
     }else{
-
-        if(dias > 0){
-            document.getElementById('diasEscolhidos').innerHTML = dias;
-        
-        }else{
-            console.log("E necessario entrar com um valor para a data");
-
-        }
+        document.getElementById('diasEscolhidos').innerHTML = `${dias} dia(s)`;
 
         //LOGICA DE DIVISAO DOS VALORES COLETADOS
         for(let i = 0; i < calcularProjecao.length; i++){
@@ -43,10 +42,10 @@ function funcaoProjecao() {
         }
 
         //OBTER MEDIA
-        valorResultado = valorResultado / 6;
+        valorResultado = valorResultado / (calcularProjecao.length - 1);
         console.log("O valor da curva de crescimento e: "+ valorResultado);
 
-        //LOGICA DE POTENCIA (UTILIZANDO OS DIAS COMO PARAMETRO DE QUANTIDADE)
+        //LOGICA DE POTENCIA (UTILIZANDO OS DIAS COMO PARAMETRO DE QUANTIDADE PARA A POTENCIA)
         for(let i = 0; i < dias; i++){
             potencia = potencia * valorResultado;
 
@@ -95,30 +94,30 @@ function add(){
 
 //ARMAZENANDO VALORES NO ARRAY CAPITURADOS DO .JSON
 window.addEventListener('load', function iniciar(){
-    fetch('https://covid.ourworldindata.org/data/owid-covid-data.json')
+    try {
+        fetch('https://covid.ourworldindata.org/data/owid-covid-data.json')
         .then(function (response) {
             console.log(response)
             return response.json()
+
         })
         .then(function (response){
-            for(var j = 0; j < response.OWID_WRL.data.length; j++){ 
+            for(var i = 0; i < response.OWID_WRL.data.length; i++){ 
                 
-                console.log("Posicao "+ j)
-                console.log(response.OWID_WRL.data[j].total_cases)
+                console.log("Posicao "+ i)
+                console.log(response.OWID_WRL.data[i].total_cases)
 
-                let cont = 0;
-                armazenar = armazenar + (response.OWID_WRL.data[(cont+1)].total_cases / response.OWID_WRL.data[j].total_cases)
+                
+                armazenar = armazenar + (response.OWID_WRL.data[(cont+1)].total_cases / response.OWID_WRL.data[i].total_cases)
                 console.log("O resultado: "+ armazenar) 
 
-                if(j >= 243){
-                    /*NECESSARIO REALIZAR MELHORAMENTOS*/
-                    calcularProjecao[0] = response.OWID_WRL.data[243].total_cases;
-                    calcularProjecao[1] = response.OWID_WRL.data[244].total_cases;
-                    calcularProjecao[2] = response.OWID_WRL.data[245].total_cases;
-                    calcularProjecao[3] = response.OWID_WRL.data[246].total_cases;
-                    calcularProjecao[4] = response.OWID_WRL.data[247].total_cases;
-                    calcularProjecao[5] = response.OWID_WRL.data[248].total_cases;
-                    calcularProjecao[6] = response.OWID_WRL.data[249].total_cases;
+                //AMARMAZENAR VALORES COLETADOS DENTRO DO ARRAY 'calcularProjecao'
+                if(i >= 243){
+                    
+                    calcularProjecao[valorCalcular] = response.OWID_WRL.data[valorRequisicao].total_cases;
+                    
+                    valorCalcular++;
+                    valorRequisicao++;
 
                     console.log("Valor atribuido ao array CalcularProjecao")
 
@@ -130,5 +129,10 @@ window.addEventListener('load', function iniciar(){
             }
 
        })
+            
+    } catch (error) {
+        console.log("Nao foi localizada a requisicao no servidor, tente novamente"+ error);
+        
+    }
         
 });
