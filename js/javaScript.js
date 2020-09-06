@@ -81,6 +81,7 @@ function inserirValor() {
 }
 
 //ADICIONANDO UM NOVO VALOR A VARIAVEL DIAS
+document.querySelector(".adicionar").onclick = function() {add()}
 function add(){
     var quantidade = parseInt(document.getElementById('numero').value);
     dias = quantidade;
