@@ -1,6 +1,8 @@
 # CALCULADORA COVID-19
  - Calculadora desenvolvida para estimar a quantidade total de casos de covid, ao logo dos dias. Utilizando com base de calculos, os ultimo sensos realizados, sobre os infectados pelo novo coronavirus
 
+![GitHub Logo](img/calculadora_covid_index.png)
+
 ## COMO USAR
  - Para se utilizar essa calculadora, e necessario entrar somente com a quantidade de dias, que queria projetar para saber qual a quantidade total de casos de COVID-19 no mundo
 
